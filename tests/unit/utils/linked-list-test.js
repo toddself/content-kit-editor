@@ -236,6 +236,27 @@ test(`#forEach iterates one`, (assert) => {
   assert.deepEqual(indexes, [0], 'indexes correct');
 });
 
+test(`#forEach iterates correctly when removing items`, (assert) => {
+  let list = new LinkedList();
+  let items = [
+    new LinkedItem(),
+    new LinkedItem(),
+    new LinkedItem()
+  ];
+  items.forEach((item, index) => {
+    item.index = index;
+    list.append(item);
+  });
+  assert.equal(list.length, 3);
+  let seenItemIndexes = [];
+  list.forEach((item) => {
+    list.remove(item);
+    seenItemIndexes.push(item.index);
+  });
+  assert.deepEqual(seenItemIndexes, [0,1,2]);
+  assert.ok(list.isEmpty);
+});
+
 test(`#readRange walks from start to end`, (assert) => {
   let list = new LinkedList();
   let itemOne = new LinkedItem();

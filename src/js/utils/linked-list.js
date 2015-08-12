@@ -99,9 +99,10 @@ export default class LinkedList {
     let item = this.head;
     let index = 0;
     while (item) {
+      let nextItem = item.next;
       callback(item, index);
       index++;
-      item = item.next;
+      item = nextItem;
     }
   }
   readRange(startItem, endItem) {
